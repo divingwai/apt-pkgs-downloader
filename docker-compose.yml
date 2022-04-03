@@ -4,7 +4,7 @@ version: "3"
 services:
   downloader:
     build: ./downloader
-    container_name: "pipdownloader"
+    container_name: "aptdownloader"
     volumes:
-      - ./pip_pkgs/:/pip_pkgs
-    command: bash -c  "cp -r /pip/* /pip_pkgs"
+      - ./pkgs/:/pkgs
+    command: bash -c  "cp -r /apt/*.deb /pkgs && cp -r /var/cache/apt/archives/*.deb /pkgs"
