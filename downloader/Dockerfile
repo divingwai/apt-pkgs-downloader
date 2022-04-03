@@ -1,7 +1,5 @@
 FROM ubuntu:18.04
 
-VOLUME ["/apt"]
-
 RUN mkdir -p /apt
 
 WORKDIR /apt
