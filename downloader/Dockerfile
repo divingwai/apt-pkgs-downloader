@@ -1,19 +1,14 @@
-FROM ubuntu:18.04
+FROM python:3.7
 
-RUN mkdir -p /apt
+RUN mkdir -p /pip
 
-WORKDIR /apt
+WORKDIR /pip
 
-RUN export DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get -y update 
+ARG PACKAGES="scipy pandas matplotlib seaborn"
 
-RUN apt-get install -y systemd 
+RUN pip install ${PACKAGES} 
 
-ARG PACKAGES="systemd curl git"
+RUN pip freeze > requirements.txt
 
-RUN apt-get download $(apt-cache depends --recurse --no-recommends --no-suggests \
-    --no-conflicts --no-breaks --no-replaces --no-enhances \
-    --no-pre-depends ${PACKAGES} | grep "^\w")
-
-RUN apt-get install -y --download-only ${PACKAGES} 
+RUN pip download ${PACKAGES} 
