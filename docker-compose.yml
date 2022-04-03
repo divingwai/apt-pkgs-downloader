@@ -1,0 +1,10 @@
+
+version: "3"
+
+services:
+  downloader:
+    build: ./downloader
+    container_name: "aptdownloader"
+    volumes:
+      - ./pkgs/:/pkgs
+    command: bash -c  "cp -r /apt/*.deb /pkgs && cp -r /var/cache/apt/archives/*.deb /pkgs"
